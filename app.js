@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const indexRouter=require("./routes/index")
 const usersRouter = require("./routes/usersRouter");
 const productsRouter = require("./routes/productsRouters");
 const ownerRouter = require("./routes/ownerRouter");
@@ -12,9 +13,8 @@ app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.send("working ...");
-});
+
+app.use("/", indexRouter);
 app.use("/owner", ownerRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
